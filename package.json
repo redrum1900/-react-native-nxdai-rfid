@@ -1,22 +1,61 @@
 {
-	"name": "react_native_nxdai_rfid",
-	"version": "0.0.1",
-	"private": true,
-	"scripts": {
-		"start": "node node_modules/react-native/local-cli/cli.js start",
-		"test": "jest"
-	},
-	"dependencies": {
-		"react": "16.0.0-alpha.12",
-		"react-native": "0.47.2"
-	},
-	"devDependencies": {
-		"babel-jest": "20.0.3",
-		"babel-preset-react-native": "3.0.2",
-		"jest": "20.0.4",
-		"react-test-renderer": "16.0.0-alpha.12"
-	},
-	"jest": {
-		"preset": "react-native"
-	}
+  "_args": [
+    [
+      {
+        "raw": "/Users/redrum/frontend/react-native-nxdai-rfid",
+        "scope": null,
+        "escapedName": null,
+        "name": null,
+        "rawSpec": "/Users/redrum/frontend/react-native-nxdai-rfid",
+        "spec": "/Users/redrum/frontend/react-native-nxdai-rfid",
+        "type": "directory"
+      },
+      "/Users/redrum/frontend/rn_android"
+    ]
+  ],
+  "_from": "../react-native-nxdai-rfid",
+  "_id": "react-native-nxdai-rfid@0.0.1",
+  "_inCache": true,
+  "_location": "/react-native-nxdai-rfid",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "/Users/redrum/frontend/react-native-nxdai-rfid",
+    "scope": null,
+    "escapedName": null,
+    "name": null,
+    "rawSpec": "/Users/redrum/frontend/react-native-nxdai-rfid",
+    "spec": "/Users/redrum/frontend/react-native-nxdai-rfid",
+    "type": "directory"
+  },
+  "_requiredBy": [
+    "#USER"
+  ],
+  "_resolved": "file:../react-native-nxdai-rfid",
+  "_shasum": "57235862b56541600f936edc621824d4b2ee1ea9",
+  "_shrinkwrap": null,
+  "_spec": "/Users/redrum/frontend/react-native-nxdai-rfid",
+  "_where": "/Users/redrum/frontend/rn_android",
+  "dependencies": {
+    "react": "16.0.0-alpha.12",
+    "react-native": "0.47.2"
+  },
+  "devDependencies": {
+    "babel-jest": "20.0.3",
+    "babel-preset-react-native": "3.0.2",
+    "jest": "20.0.4",
+    "react-test-renderer": "16.0.0-alpha.12"
+  },
+  "gitHead": "fb0666cd43e311c5efba9cb2996f7c10126866d3",
+  "jest": {
+    "preset": "react-native"
+  },
+  "name": "react-native-nxdai-rfid",
+  "optionalDependencies": {},
+  "private": true,
+  "readme": "ERROR: No README data found!",
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "test": "jest"
+  },
+  "version": "0.0.1"
 }
