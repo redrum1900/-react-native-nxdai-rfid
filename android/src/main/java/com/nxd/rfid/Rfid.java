@@ -1,7 +1,5 @@
 package com.nxd.rfid;
 
-import android.widget.Toast;
-import android.content.Context;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
@@ -10,11 +8,10 @@ import com.facebook.react.modules.core.DeviceEventManagerModule;
 
 public class Rfid extends ReactContextBaseJavaModule {
 
-    private Context mContext;
+    private final ReactApplicationContext reactContext;
 
     public Rfid(ReactApplicationContext reactContext) {
         super(reactContext);
-
         this.reactContext = reactContext;
     }
 
@@ -26,8 +23,7 @@ public class Rfid extends ReactContextBaseJavaModule {
     }
 
     // Send event to JS
-    private void sendEvent(String eventName,
-                            String message) {
+    private void sendEvent(String eventName,String message) {
         reactContext
             .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
             .emit(eventName, message);
