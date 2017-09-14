@@ -1,7 +1,5 @@
 package com.hyipc.uhf_r2000.hardware.assist;
 
-import com.hyipc.uhf_r2000.fragment.SetFragment;
-
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
