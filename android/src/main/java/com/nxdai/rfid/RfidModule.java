@@ -1,4 +1,4 @@
-package com.nxd.rfid;
+package com.nxdai.rfid;
 
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
@@ -6,11 +6,11 @@ import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.Callback;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
 
-public class Rfid extends ReactContextBaseJavaModule {
+public class RfidModule extends ReactContextBaseJavaModule {
 
     private final ReactApplicationContext reactContext;
 
-    public Rfid(ReactApplicationContext reactContext) {
+    public RfidModule(ReactApplicationContext reactContext) {
         super(reactContext);
         this.reactContext = reactContext;
     }
