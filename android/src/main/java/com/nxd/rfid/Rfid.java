@@ -21,25 +21,24 @@ public class Rfid extends ReactContextBaseJavaModule {
     public String getName() {
 
         //返回的这个名字是必须的，在rn代码中需要这个名字来调用该类的方法。
-        return "RCTRfid";
+        return "Rfid";
+    }
+
+    // Send event to JS
+    private void sendEvent(String eventName,
+                            String message) {
+        reactContext
+            .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
+            .emit(eventName, message);
     }
 
     @ReactMethod
-    public void Toast(String msg){
-
-        Toast.makeText(mContext,msg,Toast.LENGTH_SHORT).show();
-
+    public void start(){
+        sendEvent('UhfReaderStarted', 'reading...');
     }
 
     @ReactMethod
-    public void getResult(String msg,final Callback callback){
-        new Thread(new Runnable(){
-            @Override
-            public void run(){
-
-                int sss = 2222;
-                callback.invoke(sss);
-            }
-        }).start();
+    public void stop(){
+        sendEvent('UhfReaderStoped', 'stoping...');
     }
 }

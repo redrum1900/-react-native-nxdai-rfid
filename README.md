@@ -3,11 +3,11 @@
 npm install https://github.com/redrum1900/react-native-nxdai-rfid --save
 ```
 
-### Installation (only Android)
+### Installation (only Android) in settings.gradle
 ```gradle
 ...
 include ':react-native-nxdai-rfid'
-project(':react-native-nxdai-rfid').projectDir = new File(settingsDir, '../node_modules/react-native-nxdai-rfid/android')
+project(':react-native-nxdai-rfid').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-nxdai-rfid/android')
 ```
 
 * In `android/app/build.gradle`
