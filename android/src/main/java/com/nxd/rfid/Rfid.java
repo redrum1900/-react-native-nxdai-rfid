@@ -14,7 +14,7 @@ public class Rfid extends ReactContextBaseJavaModule {
     public Rfid(ReactApplicationContext reactContext) {
         super(reactContext);
 
-        mContext = reactContext;
+        this.reactContext = reactContext;
     }
 
     @Override
@@ -34,11 +34,11 @@ public class Rfid extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void start(){
-        sendEvent('UhfReaderStarted', 'reading...');
+        sendEvent("UhfReaderStarted", "reading...");
     }
 
     @ReactMethod
     public void stop(){
-        sendEvent('UhfReaderStoped', 'stoping...');
+        sendEvent("UhfReaderStoped", "stoping...");
     }
 }
