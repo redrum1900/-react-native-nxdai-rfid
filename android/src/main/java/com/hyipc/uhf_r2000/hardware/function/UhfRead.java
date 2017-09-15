@@ -1,6 +1,5 @@
 package com.hyipc.uhf_r2000.hardware.function;
 
-import android.content.Context;
 import android.text.TextUtils;
 
 import com.hyipc.uhf_r2000.hardware.assist.UhfReadListener;
