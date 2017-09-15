@@ -23,11 +23,9 @@ public class UhfRead extends Thread {
 
 	private boolean mIsLoop = true;
 	private boolean mIsPause = false;
-	private Context mCtx;
 
-	public UhfRead(UhfReadListener listener,Context context) {
+	public UhfRead(UhfReadListener listener) {
 		mListener = listener;
-		this.mCtx = context;
 	}
 	
 	@Override
