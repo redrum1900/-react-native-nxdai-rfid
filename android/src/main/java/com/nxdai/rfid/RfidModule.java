@@ -13,13 +13,35 @@ import com.hyipc.uhf_r2000.hardware.assist.UhfReadListener;
 
 public class RfidModule extends ReactContextBaseJavaModule {
 
-    private UhfRead mUhfRead;
-    private UhfComm mUhfComm;
+    private final UhfRead uhfRead;
+    private final UhfComm uhfComm;
     private final ReactApplicationContext reactContext;
 
     public RfidModule(ReactApplicationContext reactContext) {
         super(reactContext);
         this.reactContext = reactContext;
+        this.uhfComm = new UhfComm();
+        uhfComm.init();
+        this.uhfRead = new UhfRead(new UhfReadListener() {
+            @Override
+            public void onErrorCaughted(String error) {
+            }
+
+            @Override
+            public void onContentCaughted(Object[] contents) {
+                WritableMap map = Arguments.createMap();
+                WritableArray results = Arguments.createArray();
+                for (int i = 0; i < contents.length; i++) {
+                    String content = (String) contents[i];
+                    results.pushString(content);
+                }
+                map.putArray("results", results);
+                sendEvent("readContentsSuccess", map);
+            }
+        });
+        uhfRead.setmMem((byte) 1);
+        uhfRead.setmWordPtr((byte) 0);
+        uhfRead.setmNum((byte) 6);
     }
 
     @Override
@@ -43,45 +65,48 @@ public class RfidModule extends ReactContextBaseJavaModule {
     }
 
     // @ReactMethod
-    // public void start() {
-    //     WritableMap map = Arguments.createMap();
-    //     WritableArray results = Arguments.createArray();
-    //     results.pushString("3");
-    //     results.pushString("4");
-    //     map.putArray("results", results);
-    //     sendEvent("readContentsSuccess", map);
+    // public void start(){
+    //     uhfComm.init();
+    //     uhfRead.init();
+    //     uhfRead.start();
+    //     mUhfComm = new UhfComm();
+    //     mUhfComm.init();
+    //     mUhfRead = new UhfRead(new UhfReadListener() {
+    //         @Override
+    //         public void onErrorCaughted(String error) {
+    //         }
+
+    //         @Override
+    //         public void onContentCaughted(Object[] contents) {
+    //             WritableMap map = Arguments.createMap();
+    //             WritableArray results = Arguments.createArray();
+    //             for (int i = 0; i < contents.length; i++) {
+    //                 String content = (String) contents[i];
+    //                 results.pushString(content);
+    //             }
+    //             map.putArray("results", results);
+    //             sendEvent("readContentsSuccess", map);
+    //         }
+    //     });
+
+    //     mUhfRead.setmMem((byte) 1);
+    //     mUhfRead.setmWordPtr((byte) 0);
+    //     mUhfRead.setmNum((byte) 6);
+    //     mUhfRead.start();
     // }
 
-   @ReactMethod
-   public void start(){
-       mUhfComm = new UhfComm();
-       mUhfComm.init();
-       mUhfRead = new UhfRead(new UhfReadListener() {
-           @Override
-           public void onErrorCaughted(String error) {
-           }
-
-           @Override
-           public void onContentCaughted(Object[] contents) {
-               WritableMap map = Arguments.createMap();
-               WritableArray results = Arguments.createArray();
-               for (int i = 0; i < contents.length; i++) {
-                   String content = (String) contents[i];
-                   results.pushString(content);
-               }
-               map.putArray("results", results);
-               sendEvent("readContentsSuccess", map);
-           }
-       });
-
-       mUhfRead.setmMem((byte) 1);
-       mUhfRead.setmWordPtr((byte) 0);
-       mUhfRead.setmNum((byte) 6);
-       mUhfRead.start();
-   }
+    @ReactMethod
+    public void start() {
+        uhfRead.start();
+    }
 
     @ReactMethod
     public void stop(){
-        sendEventWithString("UhfReaderStoped", "stoping...");
+        uhfRead.pause();
+    }
+
+    @ReactMethod
+    public void restart(){
+        uhfRead.reStart();
     }
 }
