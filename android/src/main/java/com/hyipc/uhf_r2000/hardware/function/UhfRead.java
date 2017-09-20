@@ -22,6 +22,7 @@ public class UhfRead extends Thread {
 
 	private boolean mIsLoop = true;
 	private boolean mIsPause = false;
+	public static int count = 10;
 
 	public UhfRead(UhfReadListener listener) {
 		mListener = listener;
@@ -70,8 +71,8 @@ public class UhfRead extends Thread {
 			String strnum;
 			String[] contents;
 			// ==== ReadDataG2的参数 end ====
-			
 			while (mIsLoop) {
+
                 boolean Inventoried = com.halio.r2000.InventoryG2(UhfComm.sAddr, QValue, Session, MaskMem, MaskAdr, MaskLen, MaskData, MaskFlag, AdrTID, LenTID, TIDFlag, pEPCList, Ant1, Totallen, CardNum);
 				if (!Inventoried) {
 					showErr("InventoryG2 fail");
@@ -100,15 +101,26 @@ public class UhfRead extends Thread {
 									sbContent.append(strnum);
 									sbContent.append("");
 								}
+
 								if (!TextUtils.isEmpty(sbContent.toString())) {
-									contents[index_contents++] = sbContent.toString();
+									// 绿色耳标
+									if(sbContent.length() == 16) {
+											contents[index_contents++] = sbContent.substring(0, 15);
+									}
+									// 橙色耳标
+									if (sbContent.length() == 24) {
+											contents[index_contents++] = sbContent.substring(9);
+									}
 								}
 								Logger.D("content:"+sbContent.toString());
 								index += (length + 2);
 
 								sbContent.setLength(0);
 							}
-							showContent(contents);
+							count -= 1;
+							if(count >=0){
+								showContent(contents);
+							}
 						} else {
 							// 非 EPC 区内容
 							totalLength = Totallen[0];

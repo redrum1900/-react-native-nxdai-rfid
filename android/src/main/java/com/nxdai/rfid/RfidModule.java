@@ -16,6 +16,7 @@ public class RfidModule extends ReactContextBaseJavaModule {
     private final UhfRead uhfRead;
     private final UhfComm uhfComm;
     private final ReactApplicationContext reactContext;
+    private boolean first = true;
 
     public RfidModule(ReactApplicationContext reactContext) {
         super(reactContext);
@@ -64,40 +65,15 @@ public class RfidModule extends ReactContextBaseJavaModule {
                 .emit(eventName, message);
     }
 
-    // @ReactMethod
-    // public void start(){
-    //     uhfComm.init();
-    //     uhfRead.init();
-    //     uhfRead.start();
-    //     mUhfComm = new UhfComm();
-    //     mUhfComm.init();
-    //     mUhfRead = new UhfRead(new UhfReadListener() {
-    //         @Override
-    //         public void onErrorCaughted(String error) {
-    //         }
-
-    //         @Override
-    //         public void onContentCaughted(Object[] contents) {
-    //             WritableMap map = Arguments.createMap();
-    //             WritableArray results = Arguments.createArray();
-    //             for (int i = 0; i < contents.length; i++) {
-    //                 String content = (String) contents[i];
-    //                 results.pushString(content);
-    //             }
-    //             map.putArray("results", results);
-    //             sendEvent("readContentsSuccess", map);
-    //         }
-    //     });
-
-    //     mUhfRead.setmMem((byte) 1);
-    //     mUhfRead.setmWordPtr((byte) 0);
-    //     mUhfRead.setmNum((byte) 6);
-    //     mUhfRead.start();
-    // }
-
     @ReactMethod
     public void start() {
-        uhfRead.start();
+        uhfRead.count = 10;
+        if(first){
+            uhfRead.start();
+            first = false;
+        }else{
+            uhfRead.reStart();
+        }
     }
 
     @ReactMethod
